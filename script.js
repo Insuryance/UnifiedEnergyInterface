@@ -93,7 +93,35 @@ document.addEventListener("DOMContentLoaded", function () {
     dashboard.innerHTML = output;
     drawUEIChart();
   }
-
   // Load everything
   updateDashboard();
+  const tooltip = document.getElementById('tooltip');
+
+document.getElementById('svgMap').addEventListener('load', () => {
+  const svgDoc = document.getElementById('svgMap').contentDocument;
+
+  Object.keys(data.energyMix).forEach(state => {
+    const element = svgDoc.getElementById(state);
+    if (element) {
+      const mix = data.energyMix[state];
+      const ci = getCarbonIntensity(mix);
+      const uei = getUEIScore(mix, ci);
+
+      // Color state fill based on score
+      element.style.fill = uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red';
+
+      // Tooltip events
+      element.addEventListener('mousemove', (e) => {
+        tooltip.style.display = 'block';
+        tooltip.style.left = e.clientX + 10 + 'px';
+        tooltip.style.top = e.clientY + 10 + 'px';
+        tooltip.innerHTML = `<strong>${state}</strong><br>UEI: ${uei}/100<br>CI: ${ci} gCO₂/kWh`;
+      });
+      element.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+      });
+    }
+  });
+});
+
 });
