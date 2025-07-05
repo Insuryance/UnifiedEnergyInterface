@@ -17,6 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return Math.max(0, Math.min(100, Math.round(100 - (ci / 10) + renewables)));
   }
 
+  function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute("data-theme");
+  const next = current === "light" ? "dark" : "light";
+  html.setAttribute("data-theme", next);
+}
+
   function updateDashboard() {
     let output = `<h2>📊 Live Grid Status</h2>`;
 
