@@ -97,8 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
   updateDashboard();
   const tooltip = document.getElementById('tooltip');
 
-document.getElementById('svgMap').addEventListener('load', () => {
-  const svgDoc = document.getElementById('svgMap').contentDocument;
+window.addEventListener('load', () => {
+  const embed = document.getElementById('svgMap');
+  const svgDoc = embed.getSVGDocument ? embed.getSVGDocument() : embed.contentDocument;
+
+  if (!svgDoc) return;
 
   Object.keys(data.energyMix).forEach(state => {
     const element = svgDoc.getElementById(state);
@@ -107,16 +110,15 @@ document.getElementById('svgMap').addEventListener('load', () => {
       const ci = getCarbonIntensity(mix);
       const uei = getUEIScore(mix, ci);
 
-      // Color state fill based on score
       element.style.fill = uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red';
 
-      // Tooltip events
       element.addEventListener('mousemove', (e) => {
         tooltip.style.display = 'block';
         tooltip.style.left = e.clientX + 10 + 'px';
         tooltip.style.top = e.clientY + 10 + 'px';
         tooltip.innerHTML = `<strong>${state}</strong><br>UEI: ${uei}/100<br>CI: ${ci} gCO₂/kWh`;
       });
+
       element.addEventListener('mouseleave', () => {
         tooltip.style.display = 'none';
       });
