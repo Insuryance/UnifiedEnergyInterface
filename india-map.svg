@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 900" id="india-map">
+  <style>
+    .state { fill: #ccc; stroke: #fff; stroke-width: 2; cursor: pointer; transition: fill 0.3s; }
+    .state:hover { fill: #aaa; }
+  </style>
+
+  <!-- Simplified example with 4 states -->
+  <path id="Maharashtra" class="state" d="M300,300 l100,0 l0,100 l-100,0 Z" />
+  <path id="TamilNadu" class="state" d="M600,500 l80,0 l0,80 l-80,0 Z" />
+  <path id="Karnataka" class="state" d="M500,400 l80,0 l0,80 l-80,0 Z" />
+  <path id="Gujarat" class="state" d="M200,200 l90,0 l0,90 l-90,0 Z" />
+</svg>
