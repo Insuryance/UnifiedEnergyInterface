@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UEI DISCOM Explorer</title>
+  <title>Unified Energy Interface</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <!-- Background Bubbles -->
+  <div class="bubble" style="top:10%; left:20%; animation-delay: 0s;"></div>
+  <div class="bubble" style="top:30%; left:70%; animation-delay: 2s;"></div>
+  <div class="bubble" style="top:80%; left:40%; animation-delay: 4s;"></div>
+
   <div class="container">
     <h1>Unified Energy Interface - Data Explorer</h1>
     <p>Real-time insights into India's electricity data.</p>
@@ -14,6 +21,7 @@
       <p>Loading real-time data...</p>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
