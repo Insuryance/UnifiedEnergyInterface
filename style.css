@@ -1,21 +1,60 @@
+/* Google Fonts: Urban elegance + clean feel */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
-  padding: 20px;
-  text-align: center;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fbfc;
+  color: #1c1c1e;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
 }
 
 .container {
-  max-width: 600px;
-  margin: auto;
+  max-width: 720px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 24px;
 }
 
 #dashboard {
-  background-color: #fff;
+  background-color: #f0f4f8;
   padding: 20px;
   border-radius: 12px;
-  margin-top: 20px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
 }
 
+/* Hover effect */
+.container:hover {
+  transform: scale(1.01);
+}
+
+/* Glow or subtle effect */
+#dashboard:hover {
+  background-color: #e8f0ff;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.08);
+}
