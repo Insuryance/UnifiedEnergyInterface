@@ -111,6 +111,43 @@ strong {
   pointer-events: none;
 }
 
+#tooltip {
+  position: absolute;
+  display: none;
+  padding: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 0.9rem;
+  pointer-events: none;
+  z-index: 10;
+}
+#map-container {
+  position: relative;
+}
+.state {
+  fill: #ccc;
+  stroke: white;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.3s ease;
+}
+.state:hover {
+  opacity: 0.8;
+}
+
+[data-theme="dark"] #tooltip {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f4f8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+canvas {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0) scale(1);
@@ -121,4 +158,5 @@ strong {
   100% {
     transform: translateY(0) scale(1);
   }
+  
 }
