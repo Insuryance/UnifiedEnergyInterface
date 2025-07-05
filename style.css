@@ -34,6 +34,10 @@ body {
   overflow-x: hidden;   /* Prevents horizontal scrolling */
   overflow-y: auto;     
 }
+canvas {
+  max-width: 100%;
+  margin-top: 20px;
+}
 
 .container {
   max-width: 720px;
