@@ -1,1 +1,21 @@
+body {
+  font-family: sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+#dashboard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
 
