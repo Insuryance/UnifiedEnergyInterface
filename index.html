@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unified Energy Interface</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <!-- Theme Toggle Button -->
   <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
 
   <!-- Background Bubbles -->
@@ -14,20 +17,23 @@
   <div class="bubble" style="top:30%; left:70%; animation-delay: 2s;"></div>
   <div class="bubble" style="top:80%; left:40%; animation-delay: 4s;"></div>
 
+  <!-- Main Content Container -->
   <div class="container">
     <h1>Unified Energy Interface</h1>
     <p>Real-time insights into India's electricity data.</p>
+
+    <!-- Dashboard Section -->
     <div id="dashboard">
+      <!-- UEI Comparison Chart -->
       <h2 style="margin-top: 32px;">🔎 UEI Score Comparison</h2>
       <canvas id="ueiChart" width="600" height="300"></canvas>
+
+      <!-- State-by-state data list will be injected here by script.js -->
     </div>
   </div>
-<script src="data.js"></script>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
   <script src="script.js"></script>
-  <!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <h2 style="margin-top: 40px;">🗺️ UEI Map Explorer</h2>
-</div>
-<div id="tooltip" style="position:absolute; display:none; padding:8px; background:var(--card-bg); color:var(--text-color); border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); font-size:14px;"></div>
 </body>
 </html>
