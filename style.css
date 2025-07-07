@@ -187,6 +187,40 @@ canvas {
   pointer-events: none;
 }
 
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 20px;
+  margin-left: 8px;
+  color: white;
+  vertical-align: middle;
+}
+
+.badge.good {
+  background-color: #2ecc71; /* green */
+}
+
+.badge.moderate {
+  background-color: #f39c12; /* orange */
+}
+
+.badge.bad {
+  background-color: #e74c3c; /* red */
+}
+.card-good {
+  border-left: 6px solid #2ecc71;
+}
+
+.card-moderate {
+  border-left: 6px solid #f39c12;
+}
+
+.card-bad {
+  border-left: 6px solid #e74c3c;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0) scale(1);
