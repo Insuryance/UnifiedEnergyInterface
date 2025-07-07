@@ -96,4 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 🚀 Init
   updateDashboard();
+  // 🌍 Modal Controls
+function openModal() {
+  document.getElementById('ueiModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('ueiModal').style.display = 'none';
+}
 });
