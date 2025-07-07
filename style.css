@@ -103,13 +103,19 @@ strong {
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
   margin-bottom: 24px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
+  cursor: pointer;
 }
 
 .state-card:hover {
   transform: translateY(-4px);
+  background-color: rgba(255,255,255,0.04);
 }
 
+.details {
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
 /* Canvas chart spacing */
 canvas {
   max-width: 100%;
