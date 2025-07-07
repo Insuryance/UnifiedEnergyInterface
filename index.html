@@ -32,23 +32,26 @@
   </div>
 
   <!-- UEI Info Modal -->
-  <div id="ueiModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeModal">&times;</span>
-      <h2>📘 Unified Energy Interface (UEI)</h2>
-      <p>
-        UEI is a score that reflects how clean, efficient, and sustainable a state's electricity generation is.
-        It's calculated based on the carbon intensity (CI) and the percentage of renewable sources like solar, wind, and hydro.
-      </p>
-      <p><strong style="color: var(--accent);">Formula:</strong><br />
-        UEI = 100 - (Carbon Intensity / 10) + Renewable %
-      </p>
-      <p>
-        Higher UEI = Better energy mix. Targeting 80+ ensures a clean energy future 🌍⚡
-      </p>
-    </div>
-  </div>
+ <!-- Info Button -->
+<button id="ueiInfoBtn" class="info-button">What is UEI?</button>
 
+<!-- UEI Info Modal -->
+<div id="ueiModal" class="modal-overlay">
+  <div class="modal-box">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h2>📘 Unified Energy Interface (UEI)</h2>
+    <p>
+      UEI is a score that reflects how clean, efficient, and sustainable a state's electricity generation is.
+      It's calculated based on the carbon intensity (CI) and the percentage of renewable sources like solar, wind, and hydro.
+    </p>
+    <p><strong style="color: var(--accent);">Formula:</strong><br />
+      UEI = 100 - (Carbon Intensity / 10) + Renewable %
+    </p>
+    <p>
+      Higher UEI = Better energy mix. Targeting 80+ ensures a clean energy future 🌍⚡
+    </p>
+  </div>
+</div>
   <!-- Scripts -->
   <script src="data.js"></script>
   <script src="script.js"></script>
