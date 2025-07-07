@@ -141,7 +141,25 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     };
   }
+// ⏱ Update refresh time display
+function updateTimestamp() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString();
+  document.getElementById('lastUpdated').textContent = `Last updated: ${timeString}`;
+}
 
+// 🔁 Refresh dashboard manually or on interval
+function refreshData() {
+  // In future: fetch from real API here
+  updateDashboard();     // redraw chart + cards
+  updateTimestamp();     // update time
+}
+
+// 🔄 Auto-refresh every 60s
+setInterval(refreshData, 60000);  // every 60,000 ms = 1 min
+
+// ✅ Initial call
+updateTimestamp();
   // 🚀 INIT
   updateDashboard();
 });
