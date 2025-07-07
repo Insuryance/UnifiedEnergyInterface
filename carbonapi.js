@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchCarbonIntensity() {
     try {
-      const response = await fetch("https://api.electricitymap.org/v3/carbon-intensity/latest?zone=IN", {
+      const response = await fetch("https://api.electricitymap.org/v3/carbon-intensity/latest?zone=IN-NO", {
         headers: {
           "auth-token": API_KEY
         }
