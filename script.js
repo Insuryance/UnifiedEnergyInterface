@@ -112,4 +112,12 @@ function openModal() {
 function closeModal() {
   document.getElementById('ueiModal').style.display = 'none';
 }
+  function toggleDetails(state) {
+  const el = document.getElementById(`details-${state}`);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
 });
