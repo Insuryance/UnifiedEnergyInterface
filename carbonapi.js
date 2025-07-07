@@ -1,19 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const nationalCIElement = document.getElementById("nationalCI");
 
-  // Replace this with your actual key
-  const API_KEY = "jQVrkKWiwyOcD4LILLrO";
+  const API_KEY = "jQVrkKWiwyOcD4LILLrO"; // ✅ your actual API key
 
   async function fetchCarbonIntensity() {
     try {
       const res = await fetch("https://api.electricitymap.org/v3/carbon-intensity/latest?zone=IN", {
-        headers: {
-          "auth-token": API_KEY
-        }
+        headers: { "auth-token": API_KEY }
       });
 
+      if (!res.ok) {
+        throw new Error(`API error: ${res.status}`);
+      }
+
       const json = await res.json();
-      const ci = json.data.carbonIntensity;
+      const ci = json.carbonIntensity.value;
 
       nationalCIElement.innerHTML = `🌏 National Carbon Intensity: <strong>${ci} gCO₂/kWh</strong>`;
     } catch (err) {
@@ -23,5 +24,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   fetchCarbonIntensity();
-  setInterval(fetchCarbonIntensity, 5 * 60 * 1000); // refresh every 5 min
+  setInterval(fetchCarbonIntensity, 5 * 60 * 1000); // Refresh every 5 minutes
 });
