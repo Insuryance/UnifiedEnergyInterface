@@ -16,44 +16,56 @@
   <div class="bubble" style="top:30%; left:70%; animation-delay: 2s;"></div>
   <div class="bubble" style="top:80%; left:40%; animation-delay: 4s;"></div>
 
-  <!-- Main Content Container -->
+  <!-- Main Content -->
   <div class="container">
     <h1>Unified Energy Interface</h1>
     <p>Real-time insights into India's electricity data.</p>
 
-    <!-- Button to open UEI Info Modal -->
-    <button id="ueiInfoBtn" class="info-button">What is UEI?</button>
+    <!-- Single button for modal -->
+    <button class="info-btn" onclick="openModal()">What is UEI?</button>
 
-    <!-- Dashboard Section -->
+    <!-- Dashboard -->
     <div id="dashboard">
       <h2 style="margin-top: 32px;">🔎 UEI Score Comparison</h2>
       <canvas id="ueiChart" width="600" height="300"></canvas>
+      <!-- State info will be added via JS -->
     </div>
   </div>
 
   <!-- UEI Info Modal -->
- <!-- Info Button -->
-<button id="ueiInfoBtn" class="info-button">What is UEI?</button>
-
-<!-- UEI Info Modal -->
-<div id="ueiModal" class="modal-overlay">
-  <div class="modal-box">
-    <span class="close-btn" id="closeModal">&times;</span>
-    <h2>📘 Unified Energy Interface (UEI)</h2>
-    <p>
-      UEI is a score that reflects how clean, efficient, and sustainable a state's electricity generation is.
-      It's calculated based on the carbon intensity (CI) and the percentage of renewable sources like solar, wind, and hydro.
-    </p>
-    <p><strong style="color: var(--accent);">Formula:</strong><br />
-      UEI = 100 - (Carbon Intensity / 10) + Renewable %
-    </p>
-    <p>
-      Higher UEI = Better energy mix. Targeting 80+ ensures a clean energy future 🌍⚡
-    </p>
+  <div id="ueiModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>📘 Unified Energy Interface (UEI)</h2>
+      <p>
+        UEI is a score that reflects how clean, efficient, and sustainable a state's electricity generation is.
+        It's calculated based on the carbon intensity (CI) and the percentage of renewable sources like solar, wind, and hydro.
+      </p>
+      <p><strong style="color: var(--accent);">Formula:</strong><br />
+        UEI = 100 - (Carbon Intensity / 10) + Renewable %
+      </p>
+      <p>
+        Higher UEI = Better energy mix. Targeting 80+ ensures a clean energy future 🌍⚡
+      </p>
+    </div>
   </div>
-</div>
+
   <!-- Scripts -->
   <script src="data.js"></script>
   <script src="script.js"></script>
+
+  <!-- Modal logic -->
+  <script>
+    function openModal() {
+      document.getElementById('ueiModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('ueiModal').style.display = 'none';
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById('ueiModal');
+      if (event.target === modal) modal.style.display = 'none';
+    };
+  </script>
 </body>
 </html>
