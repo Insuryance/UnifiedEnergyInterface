@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const dashboard = document.getElementById("dashboard");
 
-  // Theme toggle
+  // 🌗 Theme Toggle
   function toggleTheme() {
     const html = document.documentElement;
     const current = html.getAttribute("data-theme");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   window.toggleTheme = toggleTheme;
 
-  // Calculate carbon intensity from mix
+  // ⚡ Carbon Intensity Calculation
   function getCarbonIntensity(mix) {
     return Math.round(
       mix.coal * 10 +
@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // Calculate UEI score
+  // 🧠 UEI Score Calculation
   function getUEIScore(mix, ci) {
     const renewables = mix.solar + mix.wind + mix.hydro;
     return Math.max(0, Math.min(100, Math.round(100 - (ci / 10) + renewables)));
   }
 
-  // Draw UEI Bar Chart
+  // 📊 Draw UEI Bar Chart
   function drawUEIChart() {
     const ctx = document.getElementById("ueiChart").getContext("2d");
 
@@ -72,17 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Update dashboard display
+  // 🧾 Update Dashboard (Card-based UI)
   function updateDashboard() {
-    let output = `<h2>📊 Live Grid Status</h2>`;
+    let output = `<h2 style="margin-top: 40px;">📍 State-wise UEI Overview</h2>`;
 
     Object.entries(data.energyMix).forEach(([state, mix]) => {
       const ci = getCarbonIntensity(mix);
       const uei = getUEIScore(mix, ci);
 
       output += `
-        <div style="margin-bottom: 24px;">
-          <h3>📍 ${state}</h3>
+        <div class="state-card">
+          <h3>${state}</h3>
           <p>🌿 Carbon Intensity: <strong>${ci} gCO₂/kWh</strong></p>
           <p>📊 UEI Score: <strong style="color:${uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red'}">${uei}/100</strong></p>
           <p>⚡ Mix – Coal: ${mix.coal}%, Solar: ${mix.solar}%, Wind: ${mix.wind}%, Hydro: ${mix.hydro}%</p>
@@ -90,40 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
     });
 
-    dashboard.innerHTML = output;
+    dashboard.innerHTML += output;
     drawUEIChart();
   }
-  // Load everything
+
+  // 🚀 Init
   updateDashboard();
-  const tooltip = document.getElementById('tooltip');
-
-window.addEventListener('load', () => {
-  const embed = document.getElementById('svgMap');
-  const svgDoc = embed.getSVGDocument ? embed.getSVGDocument() : embed.contentDocument;
-
-  if (!svgDoc) return;
-
-  Object.keys(data.energyMix).forEach(state => {
-    const element = svgDoc.getElementById(state);
-    if (element) {
-      const mix = data.energyMix[state];
-      const ci = getCarbonIntensity(mix);
-      const uei = getUEIScore(mix, ci);
-
-      element.style.fill = uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red';
-
-      element.addEventListener('mousemove', (e) => {
-        tooltip.style.display = 'block';
-        tooltip.style.left = e.clientX + 10 + 'px';
-        tooltip.style.top = e.clientY + 10 + 'px';
-        tooltip.innerHTML = `<strong>${state}</strong><br>UEI: ${uei}/100<br>CI: ${ci} gCO₂/kWh`;
-      });
-
-      element.addEventListener('mouseleave', () => {
-        tooltip.style.display = 'none';
-      });
-    }
-  });
-});
-
 });
