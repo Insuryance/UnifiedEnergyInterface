@@ -82,7 +82,12 @@ function updateDashboard() {
 
     output += `
       <div class="state-card" onclick="toggleDetails('${state}')">
-        <h3>📍 ${state}</h3>
+         <h3>
+        📍 ${state} 
+        <span class="badge ${uei >= 80 ? 'good' : uei >= 60 ? 'moderate' : 'bad'}">
+        ${uei >= 80 ? 'Excellent' : uei >= 60 ? 'Moderate' : 'Needs Improvement'}
+        </span>
+        </h3>
         <p>🌿 Carbon Intensity: <strong>${ci} gCO₂/kWh</strong></p>
         <p>📊 UEI Score: <strong style="color:${uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red'}">${uei}/100</strong></p>
         <p>⚡ Mix – Coal: ${mix.coal}%, Solar: ${mix.solar}%, Wind: ${mix.wind}%, Hydro: ${mix.hydro}%</p>
