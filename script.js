@@ -73,27 +73,35 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 🧾 Update Dashboard (Card-based UI)
-  function updateDashboard() {
-    let output = `<h2 style="margin-top: 40px;">📍 State-wise UEI Overview</h2>`;
+function updateDashboard() {
+  let output = `<h2>📊 Live Grid Status</h2>`;
 
-    Object.entries(data.energyMix).forEach(([state, mix]) => {
-      const ci = getCarbonIntensity(mix);
-      const uei = getUEIScore(mix, ci);
+  Object.entries(data.energyMix).forEach(([state, mix]) => {
+    const ci = getCarbonIntensity(mix);
+    const uei = getUEIScore(mix, ci);
 
-      output += `
-        <div class="state-card">
-          <h3>${state}</h3>
-          <p>🌿 Carbon Intensity: <strong>${ci} gCO₂/kWh</strong></p>
-          <p>📊 UEI Score: <strong style="color:${uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red'}">${uei}/100</strong></p>
-          <p>⚡ Mix – Coal: ${mix.coal}%, Solar: ${mix.solar}%, Wind: ${mix.wind}%, Hydro: ${mix.hydro}%</p>
+    output += `
+      <div class="state-card" onclick="toggleDetails('${state}')">
+        <h3>📍 ${state}</h3>
+        <p>🌿 Carbon Intensity: <strong>${ci} gCO₂/kWh</strong></p>
+        <p>📊 UEI Score: <strong style="color:${uei >= 80 ? 'green' : uei >= 60 ? 'orange' : 'red'}">${uei}/100</strong></p>
+        <p>⚡ Mix – Coal: ${mix.coal}%, Solar: ${mix.solar}%, Wind: ${mix.wind}%, Hydro: ${mix.hydro}%</p>
+        <div class="details" id="details-${state}" style="display: none;">
+          <hr style="margin: 12px 0;">
+          <p>💡 Insights:</p>
+          <ul style="padding-left: 20px;">
+            <li>${mix.coal > 50 ? "High dependence on coal ⚠️" : "Low coal usage ✅"}</li>
+            <li>${mix.solar + mix.wind + mix.hydro > 50 ? "Strong renewable mix 🌱" : "Needs renewable push ⚡"}</li>
+            <li>${uei >= 80 ? "Excellent energy mix 🎯" : uei >= 60 ? "Moderate performance 🟠" : "Needs improvement 🔴"}</li>
+          </ul>
         </div>
-      `;
-    });
+      </div>
+    `;
+  });
 
-    dashboard.innerHTML += output;
-    drawUEIChart();
-  }
-
+  dashboard.innerHTML = output;
+  drawUEIChart();
+}
   // 🚀 Init
   updateDashboard();
   // 🌍 Modal Controls
