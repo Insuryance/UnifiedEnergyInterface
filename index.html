@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unified Energy Interface</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -21,40 +20,37 @@
   <div class="container">
     <h1>Unified Energy Interface</h1>
     <p>Real-time insights into India's electricity data.</p>
-    <button class="info-btn" onclick="openModal()">What is UEI?</button>
+
+    <!-- Button to open UEI Info Modal -->
+    <button id="ueiInfoBtn" class="info-button">What is UEI?</button>
 
     <!-- Dashboard Section -->
     <div id="dashboard">
-      <!-- UEI Comparison Chart -->
       <h2 style="margin-top: 32px;">🔎 UEI Score Comparison</h2>
       <canvas id="ueiChart" width="600" height="300"></canvas>
+    </div>
+  </div>
 
-      <!-- State-by-state data list will be injected here by script.js -->
+  <!-- UEI Info Modal -->
+  <div id="ueiModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>📘 Unified Energy Interface (UEI)</h2>
+      <p>
+        UEI is a score that reflects how clean, efficient, and sustainable a state's electricity generation is.
+        It's calculated based on the carbon intensity (CI) and the percentage of renewable sources like solar, wind, and hydro.
+      </p>
+      <p><strong style="color: var(--accent);">Formula:</strong><br />
+        UEI = 100 - (Carbon Intensity / 10) + Renewable %
+      </p>
+      <p>
+        Higher UEI = Better energy mix. Targeting 80+ ensures a clean energy future 🌍⚡
+      </p>
     </div>
   </div>
 
   <!-- Scripts -->
   <script src="data.js"></script>
   <script src="script.js"></script>
-<!-- Button to trigger modal -->
-<button id="ueiInfoBtn" class="info-button">What is UEI?</button>
-
-<!-- UEI Info Modal -->
-<div id="ueiModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="closeModal">&times;</span>
-    <h2>📘 Unified Energy Interface (UEI)</h2>
-    <p>
-      UEI is a score that reflects how clean, efficient, and sustainable a state's electricity generation is.
-      It's calculated based on the carbon intensity (CI) and the percentage of renewable sources like solar, wind, and hydro.
-    </p>
-    <p><strong style="color: var(--accent);">Formula:</strong><br />
-      UEI = 100 - (Carbon Intensity / 10) + Renewable %
-    </p>
-    <p>
-      Higher UEI = Better energy mix. Targeting 80+ ensures a clean energy future 🌍⚡
-    </p>
-  </div>
-</div>
 </body>
 </html>
