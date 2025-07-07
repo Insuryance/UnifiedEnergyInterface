@@ -81,7 +81,7 @@ function updateDashboard() {
     const uei = getUEIScore(mix, ci);
 
     output += `
-      <div class="state-card" onclick="toggleDetails('${state}')">
+      <div class="state-card ${uei >= 80 ? 'card-good' : uei >= 60 ? 'card-moderate' : 'card-bad'}" onclick="toggleDetails('${state}')">
          <h3>
         📍 ${state} 
         <span class="badge ${uei >= 80 ? 'good' : uei >= 60 ? 'moderate' : 'bad'}">
