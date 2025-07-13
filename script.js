@@ -36,7 +36,70 @@ document.addEventListener("DOMContentLoaded", function () {
       const ci = getCarbonIntensity(mix);
       return getUEIScore(mix, ci);
     });
+    function drawComparisonChart() {
+  const ctx = document.getElementById("compareChart").getContext("2d");
+  if (window.compareChartInstance) window.compareChartInstance.destroy();
 
+  const states = Object.keys(data.energyMix);
+
+  const ueiScores = states.map(state => {
+    const mix = data.energyMix[state];
+    const ci = getCarbonIntensity(mix);
+    return getUEIScore(mix, ci);
+  });
+
+  const liveMW = states.map(state => window.data.liveGen?.[state] || 0);
+
+  window.compareChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: states,
+      datasets: [
+        {
+          label: 'UEI Score',
+          data: ueiScores,
+          backgroundColor: 'rgba(0, 123, 255, 0.6)',
+          yAxisID: 'y1',
+          borderRadius: 6
+        },
+        {
+          label: 'Live Generation (MW)',
+          data: liveMW,
+          type: 'line',
+          borderColor: 'orange',
+          backgroundColor: 'orange',
+          yAxisID: 'y2',
+          tension: 0.3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      stacked: false,
+      plugins: {
+        legend: { position: 'top' }
+      },
+      scales: {
+        y1: {
+          type: 'linear',
+          position: 'left',
+          min: 0,
+          max: 100,
+          title: { display: true, text: 'UEI Score' }
+        },
+        y2: {
+          type: 'linear',
+          position: 'right',
+          beginAtZero: true,
+          title: { display: true, text: 'Generation (MW)' }
+        }
+      }
+    }
+  });
+}
+
+window.drawComparisonChart = drawComparisonChart;
     new Chart(ctx, {
       type: "bar",
       data: {
