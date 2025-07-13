@@ -1,30 +1,37 @@
+// data.js
+
 window.data = {
-  energyMix: {}
+  energyMix: {},
+  liveGen: {} // Placeholder, update later with SLDC data
 };
 
 async function fetchEmberData() {
   try {
     const res = await fetch("https://raw.githubusercontent.com/EmberClimate/India-Data-Explorer/main/state_generation/state_generation_monthly.csv");
     const text = await res.text();
-    const lines = text.split("\n").slice(1); // skip header
+    const lines = text.trim().split("\n");
 
-    const latestMonth = "2024-04"; // you can update this monthly
+    const header = lines[0].split(",");
+    const rows = lines.slice(1);
+
+    // Automatically detect latest available month
+    const dateColIndex = header.indexOf("Date");
+    const dates = rows.map(r => r.split(",")[dateColIndex]);
+    const latestMonth = dates.sort().reverse().find(d => d.match(/^\d{4}-\d{2}$/));
 
     const stateMix = {};
 
-    lines.forEach(line => {
+    rows.forEach(line => {
       const cols = line.split(",");
-      const [state, date, tech, gen] = [cols[0], cols[1], cols[2], parseFloat(cols[3] || 0)];
+      const state = cols[0];
+      const date = cols[1];
+      const tech = cols[2];
+      const gen = parseFloat(cols[3]) || 0;
 
       if (date !== latestMonth) return;
 
       if (!stateMix[state]) {
-        stateMix[state] = {
-          coal: 0,
-          solar: 0,
-          wind: 0,
-          hydro: 0
-        };
+        stateMix[state] = { coal: 0, solar: 0, wind: 0, hydro: 0 };
       }
 
       if (tech.includes("Coal")) stateMix[state].coal += gen;
@@ -33,7 +40,7 @@ async function fetchEmberData() {
       else if (tech.includes("Hydro")) stateMix[state].hydro += gen;
     });
 
-    // Convert to percentages
+    // Convert absolute generation to %
     Object.entries(stateMix).forEach(([state, mix]) => {
       const total = mix.coal + mix.solar + mix.wind + mix.hydro;
       if (total === 0) return;
@@ -46,11 +53,11 @@ async function fetchEmberData() {
       };
     });
 
-    // Trigger dashboard update
+    console.log("✅ Ember data loaded for", latestMonth);
     if (window.updateDashboard) window.updateDashboard();
 
   } catch (err) {
-    console.error("Failed to fetch Ember data", err);
+    console.error("❌ Failed to fetch Ember data", err);
   }
 }
 
