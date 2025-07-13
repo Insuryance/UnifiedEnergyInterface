@@ -86,7 +86,7 @@ canvas {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .theme-toggle:hover {
@@ -105,7 +105,7 @@ canvas {
 }
 
 /* Info Button (Modal Trigger) */
-.info-button, .info-btn {
+.info-btn {
   background-color: var(--accent);
   color: white;
   border: none;
@@ -118,7 +118,6 @@ canvas {
   margin-bottom: 24px;
 }
 
-.info-button:hover,
 .info-btn:hover {
   transform: scale(1.05);
   background-color: #0056b3;
@@ -216,6 +215,7 @@ canvas {
   pointer-events: none;
 }
 
+/* Refresh Info Bar */
 .refresh-bar {
   display: flex;
   justify-content: space-between;
