@@ -162,4 +162,6 @@ setInterval(refreshData, 60000);  // every 60,000 ms = 1 min
 updateTimestamp();
   // 🚀 INIT
   updateDashboard();
+  window.updateDashboard = updateDashboard;
+
 });
