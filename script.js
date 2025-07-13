@@ -36,70 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const ci = getCarbonIntensity(mix);
       return getUEIScore(mix, ci);
     });
-    function drawComparisonChart() {
-  const ctx = document.getElementById("compareChart").getContext("2d");
-  if (window.compareChartInstance) window.compareChartInstance.destroy();
 
-  const states = Object.keys(data.energyMix);
-
-  const ueiScores = states.map(state => {
-    const mix = data.energyMix[state];
-    const ci = getCarbonIntensity(mix);
-    return getUEIScore(mix, ci);
-  });
-
-  const liveMW = states.map(state => window.data.liveGen?.[state] || 0);
-
-  window.compareChartInstance = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: states,
-      datasets: [
-        {
-          label: 'UEI Score',
-          data: ueiScores,
-          backgroundColor: 'rgba(0, 123, 255, 0.6)',
-          yAxisID: 'y1',
-          borderRadius: 6
-        },
-        {
-          label: 'Live Generation (MW)',
-          data: liveMW,
-          type: 'line',
-          borderColor: 'orange',
-          backgroundColor: 'orange',
-          yAxisID: 'y2',
-          tension: 0.3
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      interaction: { mode: 'index', intersect: false },
-      stacked: false,
-      plugins: {
-        legend: { position: 'top' }
-      },
-      scales: {
-        y1: {
-          type: 'linear',
-          position: 'left',
-          min: 0,
-          max: 100,
-          title: { display: true, text: 'UEI Score' }
-        },
-        y2: {
-          type: 'linear',
-          position: 'right',
-          beginAtZero: true,
-          title: { display: true, text: 'Generation (MW)' }
-        }
-      }
-    }
-  });
-}
-
-window.drawComparisonChart = drawComparisonChart;
     new Chart(ctx, {
       type: "bar",
       data: {
@@ -135,7 +72,72 @@ window.drawComparisonChart = drawComparisonChart;
     });
   }
 
-  // 🧾 Update Dashboard Cards
+  // 📊 Draw Comparison Chart: UEI vs Live MW
+  function drawComparisonChart() {
+    const ctx = document.getElementById("compareChart").getContext("2d");
+    if (window.compareChartInstance) window.compareChartInstance.destroy();
+
+    const states = Object.keys(data.energyMix);
+
+    const ueiScores = states.map(state => {
+      const mix = data.energyMix[state];
+      const ci = getCarbonIntensity(mix);
+      return getUEIScore(mix, ci);
+    });
+
+    const liveMW = states.map(state => window.data.liveGen?.[state] || 0);
+
+    window.compareChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: states,
+        datasets: [
+          {
+            label: 'UEI Score',
+            data: ueiScores,
+            backgroundColor: 'rgba(0, 123, 255, 0.6)',
+            yAxisID: 'y1',
+            borderRadius: 6
+          },
+          {
+            label: 'Live Generation (MW)',
+            data: liveMW,
+            type: 'line',
+            borderColor: 'orange',
+            backgroundColor: 'orange',
+            yAxisID: 'y2',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        stacked: false,
+        plugins: {
+          legend: { position: 'top' }
+        },
+        scales: {
+          y1: {
+            type: 'linear',
+            position: 'left',
+            min: 0,
+            max: 100,
+            title: { display: true, text: 'UEI Score' }
+          },
+          y2: {
+            type: 'linear',
+            position: 'right',
+            beginAtZero: true,
+            title: { display: true, text: 'Generation (MW)' }
+          }
+        }
+      }
+    });
+  }
+  window.drawComparisonChart = drawComparisonChart;
+
+  // 🧾 Update Dashboard
   function updateDashboard() {
     let output = `<h2>📊 Live Grid Status</h2>`;
 
@@ -169,61 +171,33 @@ window.drawComparisonChart = drawComparisonChart;
 
     dashboard.innerHTML = output;
     drawUEIChart();
+    drawComparisonChart();
   }
 
   // 👇 Expand/Collapse Details
   window.toggleDetails = function (state) {
     const el = document.getElementById(`details-${state}`);
     el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  };
+
+  // ⏱ Refresh Timestamp
+  function updateTimestamp() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString();
+    document.getElementById('lastUpdated').textContent = `Last updated: ${timeString}`;
   }
 
-  // 🌍 UEI Modal Controls
-  function openModal() {
-    document.getElementById('ueiModal').style.display = 'flex';
-  }
+  // 🔁 Manual Refresh
+  window.refreshData = function () {
+    updateDashboard();
+    updateTimestamp();
+  };
 
-  function closeModal() {
-    document.getElementById('ueiModal').style.display = 'none';
-  }
+  // 🔄 Auto-refresh every 60s
+  setInterval(refreshData, 60000);
 
-  window.openModal = openModal;
-  window.closeModal = closeModal;
-
-  // 🪟 Modal Events
-  const modal = document.getElementById("ueiModal");
-  const btn = document.getElementById("ueiInfoBtn");
-  const span = document.getElementById("closeModal");
-
-  if (btn && modal && span) {
-    btn.onclick = () => modal.style.display = "flex";
-    span.onclick = () => modal.style.display = "none";
-
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    };
-  }
-// ⏱ Update refresh time display
-function updateTimestamp() {
-  const now = new Date();
-  const timeString = now.toLocaleTimeString();
-  document.getElementById('lastUpdated').textContent = `Last updated: ${timeString}`;
-}
-
-// 🔁 Refresh dashboard manually or on interval
-function refreshData() {
-  // In future: fetch from real API here
-  updateDashboard();     // redraw chart + cards
-}
-
-// 🔄 Auto-refresh every 60s
-setInterval(refreshData, 60000);  // every 60,000 ms = 1 min
-
-// ✅ Initial call
-updateTimestamp();
-  // 🚀 INIT
+  // ✅ Init
+  updateTimestamp();
   updateDashboard();
   window.updateDashboard = updateDashboard;
-
 });
