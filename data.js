@@ -52,7 +52,14 @@ async function fetchEmberData() {
         hydro: +(mix.hydro / total * 100).toFixed(1)
       };
     });
-
+    // 🌟 Simulated live generation (MW) for now — we'll replace this later with real SLDC data
+    window.data.liveGen = {
+      "Maharashtra": 17895,
+      "Gujarat": 15600,
+      "Tamil Nadu": 13250,
+      "Karnataka": 12100,
+      "Rajasthan": 9900
+    };
     console.log("✅ Ember data loaded for", latestMonth);
     if (window.updateDashboard) window.updateDashboard();
 
