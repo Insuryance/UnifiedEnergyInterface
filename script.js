@@ -152,7 +152,6 @@ function updateTimestamp() {
 function refreshData() {
   // In future: fetch from real API here
   updateDashboard();     // redraw chart + cards
-  updateTimestamp();     // update time
 }
 
 // 🔄 Auto-refresh every 60s
