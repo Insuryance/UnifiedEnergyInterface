@@ -22,19 +22,24 @@
     <h1>Unified Energy Interface</h1>
     <p>Real-time insights into India's electricity data.</p>
 
-    <!-- Single button for modal -->
+    <!-- Modal Button -->
     <button class="info-btn" onclick="openModal()">What is UEI?</button>
-  <!-- Live Refresh Info -->
-  <div id="refreshStatus" class="refresh-bar">
-    <span id="lastUpdated">Last updated: just now</span>
-    <button onclick="refreshData()" class="refresh-btn">⟳ Refresh</button>
-  </div>
+
+    <!-- Live Refresh Info -->
+    <div id="refreshStatus" class="refresh-bar">
+      <span id="lastUpdated">Last updated: just now</span>
+      <button onclick="refreshData()" class="refresh-btn">⟳ Refresh</button>
+    </div>
 
     <!-- Dashboard -->
     <div id="dashboard">
+      <!-- UEI Bar Chart -->
       <h2 style="margin-top: 32px;">🔎 UEI Score Comparison</h2>
       <canvas id="ueiChart" width="600" height="300"></canvas>
-      <!-- State info will be added via JS -->
+
+      <!-- Comparison Chart -->
+      <h2 style="margin-top: 32px;">📊 UEI vs Live Generation</h2>
+      <canvas id="compareChart" width="600" height="300"></canvas>
     </div>
   </div>
 
@@ -55,18 +60,13 @@
       </p>
     </div>
   </div>
-  <!-- UEI Chart -->
-<h2 style="margin-top: 32px;">🔎 UEI Score Comparison</h2>
-<canvas id="ueiChart" width="600" height="300"></canvas>
 
-<!-- Comparison Chart -->
-<h2 style="margin-top: 32px;">📊 UEI vs Live Generation</h2>
-<canvas id="compareChart" width="600" height="300"></canvas>
   <!-- Scripts -->
   <script src="data.js"></script>
-  <script src="script.js"></script>
   <script src="vidyut.js"></script>
-  <!-- Modal logic -->
+  <script src="script.js"></script>
+
+  <!-- Modal Logic -->
   <script>
     function openModal() {
       document.getElementById('ueiModal').style.display = 'flex';
@@ -74,7 +74,7 @@
     function closeModal() {
       document.getElementById('ueiModal').style.display = 'none';
     }
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       const modal = document.getElementById('ueiModal');
       if (event.target === modal) modal.style.display = 'none';
     };
