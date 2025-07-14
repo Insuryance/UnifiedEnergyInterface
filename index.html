@@ -977,18 +977,31 @@
             observer.observe(el);
         });
             // Data fetching and visualization
-            class UEIDataManager {
-                               setLoadingState(isLoading) {
-                        const loadingElements = document.querySelectorAll('#totalGeneration, #renewableShare, #carbonIntensity, #ueiScore');
-                        loadingElements.forEach(element => {
-                            if (isLoading) {
-                                element.innerHTML = '<div class="loading"></div>';
-                                element.parentElement.classList.add('loading-state');
-                            } else {
-                                element.parentElement.classList.remove('loading-state');
-                            }
-                        });
-                    }
+          class UEIDataManager {
+  setLoadingState(isLoading) {
+    const loadingElements = document.querySelectorAll('#totalGeneration, #renewableShare, #carbonIntensity, #ueiScore');
+    loadingElements.forEach(element => {
+      if (isLoading) {
+        element.innerHTML = '<div class="loading"></div>';
+        element.parentElement.classList.add('loading-state');
+      } else {
+        element.parentElement.classList.remove('loading-state');
+      }
+    });
+  }
+
+  // Add this to prevent errors:
+  fetchLiveData() {
+    console.log("📡 Simulating live data fetch...");
+    // simulate updating UI or data here
+    this.setLoadingState(true);
+    setTimeout(() => {
+      // simulate data update
+      this.setLoadingState(false);
+    }, 1000);
+  }
+}
+
                 // Smooth navigation
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-links a').forEach(link => {
