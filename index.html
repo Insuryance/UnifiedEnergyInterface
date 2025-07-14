@@ -1591,9 +1591,12 @@ updateTimestamp() {
             }
         }
 
-     document.addEventListener('DOMContentLoaded', () => {
-    new UEIDataManager();
-    new ConnectionMonitor();
+            // ✅ Unified initialization
+            document.addEventListener('DOMContentLoaded', () => {
+                const app = new UEIDataManager();
+                new ConnectionMonitor();
+            });
+
 
     // Navigation click handlers
     document.querySelectorAll('.nav-links a').forEach(link => {
@@ -1707,6 +1710,40 @@ function toggleMobileMenu() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('mobile-active');
 }
+        // 🎯 Minimal Cursor Trail Effect
+const trailContainer = document.createElement("div");
+trailContainer.style.position = "fixed";
+trailContainer.style.top = "0";
+trailContainer.style.left = "0";
+trailContainer.style.width = "100vw";
+trailContainer.style.height = "100vh";
+trailContainer.style.pointerEvents = "none";
+trailContainer.style.zIndex = "999";
+document.body.appendChild(trailContainer);
+
+document.addEventListener("mousemove", function(e) {
+  const dot = document.createElement("div");
+  dot.style.position = "absolute";
+  dot.style.left = `${e.clientX}px`;
+  dot.style.top = `${e.clientY}px`;
+  dot.style.width = "6px";
+  dot.style.height = "6px";
+  dot.style.background = "var(--accent)";
+  dot.style.borderRadius = "50%";
+  dot.style.opacity = "0.3";
+  dot.style.transition = "all 0.6s ease-out";
+  trailContainer.appendChild(dot);
+
+  setTimeout(() => {
+    dot.style.opacity = "0";
+    dot.style.transform = "scale(1.8)";
+  }, 10);
+
+  setTimeout(() => {
+    trailContainer.removeChild(dot);
+  }, 600);
+});
+
     </script>
 </body>
 </html>
