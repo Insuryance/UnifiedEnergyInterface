@@ -109,9 +109,6 @@
             max-width: 1200px;
             margin: 0 auto;
                 }
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
@@ -760,6 +757,9 @@
     <header>
         <nav>
             <div class="logo">UEI Portal</div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#data">Live Data</a></li>
@@ -1020,7 +1020,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Update data every 5 minutes
                     setInterval(() => this.fetchData(), 5 * 60 * 1000);
                 }
-                async fetchData() {
                 async fetchData() {
     this.setLoadingState(true);
     const startTime = Date.now();
@@ -1592,10 +1591,26 @@ updateTimestamp() {
             }
         }
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', () => {
-            new UEIDataManager();
+     document.addEventListener('DOMContentLoaded', () => {
+    new UEIDataManager();
+    new ConnectionMonitor();
+
+    // Navigation click handlers
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.remove('mobile-active');
         });
+    });
+});
+
 
         // Navigation scroll effect
         window.addEventListener('scroll', () => {
@@ -1687,12 +1702,6 @@ class ConnectionMonitor {
         });
     }
 }
-
-// Initialize connection monitor
-document.addEventListener('DOMContentLoaded', () => {
-    new UEIDataManager();
-    new ConnectionMonitor();
-});
         // Add this function near the top of your script section
 function toggleMobileMenu() {
     const navLinks = document.querySelector('.nav-links');
