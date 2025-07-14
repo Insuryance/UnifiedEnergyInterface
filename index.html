@@ -989,8 +989,6 @@
       }
     });
   }
-
-  // Add this to prevent errors:
   fetchLiveData() {
     console.log("📡 Simulating live data fetch...");
     // simulate updating UI or data here
@@ -1001,8 +999,7 @@
     }, 1000);
   }
 }
-
-                // Smooth navigation
+ // Smooth navigation
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -1021,17 +1018,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-                constructor() {
-                    this.energyData = {};
-                    this.newsData = [];
-                    this.initializeCharts();
-                    this.fetchData();
-                    this.loadNews();
-                    this.simulateRealTimeData();
-                    // Update data every 5 minutes
-                    setInterval(() => this.fetchData(), 5 * 60 * 1000);
-                }
-                async fetchData() {
+                class UEIDataManager {
+  constructor() {
+    this.energyData = {};
+    this.newsData = [];
+    this.initializeCharts();
+    this.fetchData();
+    this.loadNews();
+    this.simulateRealTimeData();
+    setInterval(() => this.fetchData(), 5 * 60 * 1000);
+  }
+
+  // Add other methods here...
+}
+const manager = new UEIDataManager();
+
+        async fetchData() {
     this.setLoadingState(true);
     const startTime = Date.now();
     
