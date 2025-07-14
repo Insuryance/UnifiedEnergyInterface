@@ -988,6 +988,15 @@
         element.parentElement.classList.remove('loading-state');
       }
     });
+        constructor() {
+    this.energyData = {};
+    this.newsData = [];
+    this.initializeCharts();
+    this.fetchData();
+    this.loadNews();
+    this.simulateRealTimeData();
+    setInterval(() => this.fetchData(), 5 * 60 * 1000);
+  }
   }
   fetchLiveData() {
     console.log("📡 Simulating live data fetch...");
@@ -1018,16 +1027,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-                class UEIDataManager {
-  constructor() {
-    this.energyData = {};
-    this.newsData = [];
-    this.initializeCharts();
-    this.fetchData();
-    this.loadNews();
-    this.simulateRealTimeData();
-    setInterval(() => this.fetchData(), 5 * 60 * 1000);
-  }
 
   // Add other methods here...
 }
