@@ -977,7 +977,8 @@
             observer.observe(el);
         });
             // Data fetching and visualization
-          class UEIDataManager {
+          // Data fetching and visualization
+class UEIDataManager {
   constructor() {
     this.energyData = {};
     this.newsData = [];
@@ -999,17 +1000,59 @@
       }
     });
   }
-}
+
   fetchLiveData() {
     console.log("📡 Simulating live data fetch...");
-    // simulate updating UI or data here
     this.setLoadingState(true);
     setTimeout(() => {
-      // simulate data update
       this.setLoadingState(false);
     }, 1000);
   }
+
+  // Ensure these methods are included (copied from the original code or defined as needed)
+  initializeCharts() {
+    // Implementation from original code or placeholder
+    console.log("Initializing charts...");
+    // Add actual chart initialization logic here
+  }
+
+  fetchData() {
+    // Implementation from original code or placeholder
+    console.log("Fetching data...");
+    // Add actual data fetching logic here
+  }
+
+  loadNews() {
+    // Implementation from original code or placeholder
+    console.log("Loading news...");
+    // Add actual news loading logic here
+  }
+
+  simulateRealTimeData() {
+    // Implementation from original code or placeholder
+    console.log("Simulating real-time data...");
+    // Add actual simulation logic here
+  }
 }
+
+// Smooth navigation
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+      // Close mobile menu if open
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.remove('mobile-active');
+    });
+  });
+});
  // Smooth navigation
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-links a').forEach(link => {
