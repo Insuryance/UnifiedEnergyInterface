@@ -978,6 +978,16 @@
         });
             // Data fetching and visualization
           class UEIDataManager {
+  constructor() {
+    this.energyData = {};
+    this.newsData = [];
+    this.initializeCharts();
+    this.fetchData();
+    this.loadNews();
+    this.simulateRealTimeData();
+    setInterval(() => this.fetchData(), 5 * 60 * 1000);
+  }
+
   setLoadingState(isLoading) {
     const loadingElements = document.querySelectorAll('#totalGeneration, #renewableShare, #carbonIntensity, #ueiScore');
     loadingElements.forEach(element => {
@@ -988,16 +998,8 @@
         element.parentElement.classList.remove('loading-state');
       }
     });
-        constructor() {
-    this.energyData = {};
-    this.newsData = [];
-    this.initializeCharts();
-    this.fetchData();
-    this.loadNews();
-    this.simulateRealTimeData();
-    setInterval(() => this.fetchData(), 5 * 60 * 1000);
   }
-  }
+}
   fetchLiveData() {
     console.log("📡 Simulating live data fetch...");
     // simulate updating UI or data here
