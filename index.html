@@ -1165,27 +1165,40 @@ class UEIDataManager {
     });
 
     const stateCtx = document.getElementById('stateChart').getContext('2d');
-    this.stateChart = new Chart(stateCtx, {
-      type: 'bar',
-      data: { labels: [], datasets: [{ label: 'UEI Score', data: [], backgroundColor: '#00ff88', borderRadius: 8 }] },
-      options: {
-        responsive: true,
-        scales: {
-    y: {
+this.stateChart = new Chart(stateCtx, {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'UEI Score',
+      data: [],
+      backgroundColor: '#00ff88',
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
         beginAtZero: true,
         max: 100,
         ticks: { color: '#ffffff' },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' } // Corrected line
-    },
-    x: {
+        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+      },
+      x: {
         ticks: { color: '#ffffff' },
         grid: { color: 'rgba(255, 255, 255, 0.1)' }
-    }
-},
-        plugins: { legend: { labels: { color: '#ffffff' } } }
       }
-    });
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#ffffff'
+        }
+      }
+    }
   }
+});
 
   async loadNews() {
     const newsContainer = document.getElementById('newsGrid');
